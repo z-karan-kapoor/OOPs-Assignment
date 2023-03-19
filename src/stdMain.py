@@ -1,6 +1,7 @@
 from Student import Student
 from Validate import Validate
 
+
 class Test():
 
     stu1 = Student()
@@ -19,7 +20,7 @@ class Test():
     def search_str(self,file_path, word, cnt, tar):
         """It searches in the text file for given string"""
         flag = 0
-        with open(r"stuRegistered.txt", 'r') as fp:
+        with open(r"TextFiles/stuRegistered.txt", 'r') as fp:
             for l_no, line in enumerate(fp):
                 # search string
                 if word in line:
@@ -40,7 +41,7 @@ class Test():
         """It sets the mail after validation"""
         self.stu1.Email = input('\n-------------Enter your mail-------------\n')
         if self.val1.check(self.stu1.Email) == 1:
-            if self.val1.search_str('stuRegistered.txt', f'REGISTERED-{self.stu1.Email}') == 0:
+            if self.val1.search_str('TextFiles/stuRegistered.txt', f'REGISTERED-{self.stu1.Email}') == 0:
                 file1 = open(file_name, "a")
                 file1.write(f'REGISTERED-{self.stu1.Email}\n')
                 self.stu1.register_success()
@@ -96,18 +97,18 @@ class Test():
             f'\n---------------Press Y to Enrollment for {self.stu1.Subject} else N--------------\n')
         if en == 'Y' or en == 'y':
             str = self.stu1.Subject
-            tmp = f'{str.lower()}Data.txt'
+            tmp = f'TextFiles/{str.lower()}Data.txt'
             if self.val1.search_str(tmp, f'ENROLLED-{self.stu1.Email}') == 1:
                 self.stu1.already_enroll()
             else:
-                if self.stu1.Subject == 'Bio' or self.stu1.Subject == 'bio' or self.stu1.Subject == 'Math' or stu1.Subject == 'math':
+                if self.stu1.Subject == 'Bio' or self.stu1.Subject == 'bio' or self.stu1.Subject == 'Math' or self.stu1.Subject == 'math':
                     tar = 30
                     cnt = self.cnt_values(tmp)
                     tmp = self.search_str(tmp, self.stu1.Email, cnt, tar)
                 elif self.stu1.Subject == 'Commerce' or self.stu1.Subject == 'commerce':
                     tar = 0
-                    cnt = self.cnt_values('commerceData.txt')
-                    tmp = self.search_str('commerceData.txt', self.stu1.Email, cnt, tar)
+                    cnt = self.cnt_values('TextFiles/commerceData.txt')
+                    tmp = self.search_str('TextFiles/commerceData.txt', self.stu1.Email, cnt, tar)
                 else:
                     self.stu1.c_board()
         elif en == 'N' or en == 'n':
@@ -121,5 +122,5 @@ if __name__=="__main__":
     obj.set_name()
     obj.set_subject()
     obj.check_handicap()
-    obj.set_mail(obj.stu1.Subject, 'stuRegistered.txt')
+    obj.set_mail(obj.stu1.Subject, 'TextFiles/stuRegistered.txt')
     obj.enroll_process()
